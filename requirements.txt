@@ -1,0 +1,10 @@
+aiogram==2.22.1
+aiograph==0.2
+aiohttp==3.8.3
+aioredis==2.0.1
+aioschedule==0.5.2
+aiosqlite==0.17.0
+asyncpg==0.26.0
+attrs==19.1.0
+python-dotenv==0.21.0
+sqlalchemy==1.4.40
