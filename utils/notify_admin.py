@@ -16,7 +16,7 @@ async def on_startup_notify():
 
 async def everyday_broadcast():
     try:
-        weather_text = await get_weather('Актау')
+        weather_text = await get_weather('')
         rates = await get_rates()
         text = f'Дайджест на <b>{datetime.now().strftime("%d.%m.%Y")}</b>\n\n' \
                f'{weather_text}\n\n' \

@@ -9,6 +9,16 @@ from sqlalchemy import (Column, String, Integer,
 from database import Base
 
 
+class User(Base):
+    __tablename__ = 'user'
+
+    telegram_id = Column(BigInteger, primary_key=True, nullable=False)
+    city = Column(String)
+
+    def __repr__(self):
+        return f'<User> {self.id} - {self.telegram_id} - {self.city}'
+
+
 class Category(Base):
     __tablename__ = 'category'
 

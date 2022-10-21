@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from data import config
 from database import Base
 from loader import dp, bot
-from middlewares import DBMiddleware
+from middlewares import DBMiddleware, UserMiddleware
 from utils import on_startup_notify, everyday_broadcast, set_default_commands
 
 
@@ -39,6 +39,7 @@ async def on_startup():
     # middlewares
     logging.info('Setting up middlewares...')
     dp.setup_middleware(DBMiddleware(db_factory))
+    dp.setup_middleware(UserMiddleware())
     logging.info('Middlewares has been set')
 
     logging.info('Everything is ready to launch!')
