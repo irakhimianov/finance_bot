@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+    # You can remove redis section and all its mentions if using "memory" storage
+    redis:
+        image: redis:6-alpine
+        restart: "unless-stopped"
+        volumes:
+            # don't forget to put redis.conf to redis_config directory!
+            - "finance_bot/redis/config:/usr/local/etc/redis"
+            - "finance_bot/redis/data:/data"
+        command: "redis-server /usr/local/etc/redis/redis.conf"
+    db:
+        image: postgres:14.5-alpine
+        restart: "unless-stopped"
+        environment:
+            POSTGRES_PASSWORD: "rkjar"
+        volumes:
+            - "/finance_bot/pg/data:/var/lib/postgresql/data"
+            - "/finance_bot/pg/init:/docker-entrypoint-initdb.d"
+    bot:
+        image: "rkjar/finance_bot:latest"
+        stop_signal: SIGINT
+        restart: "unless-stopped"
+        env_file: .env
+        depends_on:
+            - db
+            - redis
