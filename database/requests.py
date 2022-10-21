@@ -3,7 +3,7 @@ import datetime
 from sqlalchemy import select, or_, func
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
-from database import Category, Expense
+from database import Category, Expense, User
 
 
 async def db_add_category(session: AsyncSession, codename: str, name: str, aliases: str):
@@ -13,7 +13,6 @@ async def db_add_category(session: AsyncSession, codename: str, name: str, alias
         name=name,
         aliases=aliases
     )
-    print(category)
     session.add(category)
     await session.commit()
 
@@ -85,3 +84,14 @@ async def get_month_statistics(session: AsyncSession) -> str:
     for d in details:
         text += f'<u>{d[0].capitalize()}</u> - <b>{d[1]:.2f}₽</b> - {d[2]}%\n'
     return text
+
+
+async def set_user_city(session: AsyncSession, telegram_id: int, city: str):
+    user = await session.get(User, telegram_id)
+    user.city = str(city).capitalize()
+    await session.commit()
+
+
+async def get_user_city(session: AsyncSession, telegram_id: int) -> str:
+    user = await session.get(User, telegram_id)
+    return user.city

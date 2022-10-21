@@ -4,3 +4,4 @@ from . import expense
 from . import new_category
 from . import cancel
 from . import statistics
+from . import settings

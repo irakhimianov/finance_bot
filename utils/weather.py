@@ -27,10 +27,10 @@ async def get_weather(city: str) -> str:
             resp = await resp.json()
     fact = resp['fact']
     forecast_day = resp['forecasts'][0]['parts']['day']
-    text = f'Погода в {city}\n' \
+    text = f'<b>Погода в городе {city}</b>\n\n' \
            f'<u>Температура:</u> {fact["temp"]} °C, ощущается как: {fact["feels_like"]} °C\n' \
            f'<u>Ветер:</u> {fact["wind_speed"]} м/с. <u>Давление:</u> {fact["pressure_mm"]} мм\n' \
-           f'<u>Днем:</u> {forecast_day["temp_avg"]} °C. ' \
+           f'<u>Днем:</u> {forecast_day["temp_avg"]} °C.\n' \
            f'<u>Ветер:</u> {forecast_day["wind_speed"]} м/c. ' \
            f'<u>Давление:</u> {forecast_day["pressure_mm"]} мм.'
     return text
