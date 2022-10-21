@@ -8,5 +8,6 @@ async def set_default_commands(dp: Dispatcher) -> None:
         [
             types.BotCommand('start', 'Start bot'),
             types.BotCommand('help', 'What this bot can do'),
+            types.BotCommand('weather', 'Current weather in your city'),
         ]
     )
